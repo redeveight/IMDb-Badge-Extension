@@ -1,0 +1,27 @@
+{
+    "name": "IMDb",
+    "version": "0.1",
+    "description": "IMDB Helper",
+    "permissions": ["activeTab", "declarativeContent", "storage"],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "options_page": "options.html",
+    "page_action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "files/images/imdb16.png",
+        "32": "files/images/imdb32.png",
+        "64": "files/images/imdb64.png",
+        "128": "files/images/imdb128.png"
+      }
+    },
+    "icons": {
+      "16": "files/images/imdb16.png",
+      "32": "files/images/imdb32.png",
+      "64": "files/images/imdb64.png",
+      "128": "files/images/imdb128.png"
+    },
+    "manifest_version": 2
+}
