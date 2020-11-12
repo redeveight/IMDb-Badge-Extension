@@ -1,20 +1,54 @@
 (
-    function() {
+    async function() {
         var elements = get_elements(document);
         var count = elements.length;
 
-        for (var i = 0; i < count; i++) {
-            var element = elements[i];
+        for (var e = 0; e < count; e++) {
+            var element = elements[e];
 
             if (element.text.length > 4) {
                 element.text = element.text.substring(0, 4);
             }
 
-            element.text += ' (75%)';
+            var films_list_id = get_href(element);
+            var url = 'https://www.imdb.com/list/' + films_list_id + '/export';
+            var user_url = 'https://www.imdb.com/user/ur85058361/ratings/export';
 
-            console.log(get_href(element));
+            await fetch(user_url).then(response => response.text()).then(async(user_data) => {
+                var user_films = Papa.parse(String(user_data)).data;
+                var count_user_films = user_films.length - 2;
+               
+                await fetch(url).then(response => response.text()).then(async (data) => {
+                    var films = Papa.parse(String(data)).data;
+                    var count_films = films.length - 2;
+                    var found = 0;
+    
+                    for (var i = 1; i <= count_films; i++) {
+                        var film = films[i][1];
+                        var isExist = false;
+    
+                        for (var j = 1; j <= count_user_films; j++) {
+                            var user_film = user_films[j][0];
+                            
+                            if (user_film == film) {
+                                isExist = true;
+                                break;
+                            }
+                        }
+    
+                        if (isExist) {
+                            found += 1;
+                            //console.log('Film ' + film + ' Exist');
+                        } else {
+                            //console.log('Film ' + film + ' is not Exist');
+                        }
+                    }
+    
+                    var result = (found + '/' + count_films);
+                    element.text += (' (' + result +')');
+                });
+            });
         }
-        //read_file();
     }
 )();
 
@@ -28,9 +62,4 @@ function get_elements(document) {
 function get_href(element) {
     var href = element.getAttribute('href').split('/')[2];
     return href;
-}
-
-function read_file() {
-    fetch('https://www.imdb.com/user/ur85058361/ratings/export').then(response => response.text()).then(text => console.log(text.split('\n')[1].split(',')[1]))
-    //return " (70%)";
 }
