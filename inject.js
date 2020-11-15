@@ -2,8 +2,8 @@
     async function() {
         var elements = await get_elements(document, 'Highlights');
         await processing(elements);
-        elements = await get_elements(document, 'Top 250');
-        await processing(elements);
+        /*elements = await get_elements(document, 'Top 250');
+        await processing(elements);*/
     }
 )();
 

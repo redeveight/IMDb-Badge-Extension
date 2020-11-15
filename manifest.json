@@ -1,20 +1,15 @@
 {
     "name": "IMDb",
-    "version": "0.1",
-    "description": "IMDB Helper",
+    "version": "0.2",
+    "description": "IMDB Badge Helper",
     "permissions": ["activeTab", "declarativeContent", "storage"],
+    "options_page": "options.html",
     "background": {
         "scripts": ["background.js"],
         "persistent": false
     },
-    "content_scripts": [
-      {
-        "matches": ["http://*/*","https://*/*"],
-        "js": ["papaparse.js", "inject.js"]
-      }
-    ],
-    "options_page": "options.html",
     "page_action": {
+      "default_title": "IMDB Badge Helper",
       "default_popup": "popup.html",
       "default_icon": {
         "16": "files/images/imdb16.png",
@@ -23,6 +18,12 @@
         "128": "files/images/imdb128.png"
       }
     },
+    "content_scripts": [
+      {
+        "matches": ["https://*.imdb.com/*"],
+        "js": ["papaparse.js"]
+      }
+    ],
     "icons": {
       "16": "files/images/imdb16.png",
       "32": "files/images/imdb32.png",
