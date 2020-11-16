@@ -1,6 +1,6 @@
 {
     "name": "IMDb",
-    "version": "0.2",
+    "version": "0.3",
     "description": "IMDB Badge Helper",
     "permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
     "options_page": "options.html",

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
   <html>
     <head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
       <link rel="stylesheet" href="style.css">
     </head>
     <body>
-      <label>IMDb user ID</label>
-      <input type="text">
-      <div class="button" id="btn"><span>Apply</span></div>
-      <p id="demo">=a</p>
+
+      <div class="form-group noselect">
+        <span>imdb.com/user/</span>
+        <input class="form-field" id="text_field" type="text" required>
+      </div>
+      <div class="button noselect" id="btn"><span>Apply</span></div>
+      <p id="status" style="visibility: hidden; margin-top: 10px;">Status</p>
 
       <script src="papaparse.js"></script>
       <script src="inject.js"></script>
