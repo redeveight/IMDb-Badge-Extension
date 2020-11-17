@@ -1,13 +1,28 @@
 (
     async function() {
-        var elements = await get_elements(document, 'Highlights');
-        await processing(elements);
-        /*elements = await get_elements(document, 'Top 250');
-        await processing(elements);*/
+        var lists = { "Highlights": 1, "Top 250": 2 };
+
+        var elements = await get_elements(document, lists['Highlights']);
+        updating(elements, 'Highlights');
+        elements = await get_elements(document, lists['Top 250']);
+        updating(elements, 'Top 250');
     }
 )();
 
-function processing(elements) {
+/*async function loading(elements, list_name) {
+    var count = elements.length;
+
+    for (var e = 0; e < count; e++) {
+        var element = elements[e];
+        
+        let key = list_name + '-' + await element.textContent;
+        if (result != "default") {
+            element.text += (' (' + result +')');
+        }
+    }
+}*/
+
+function updating(elements, list_name) {
     var count = elements.length;
 
     chrome.storage.sync.get('username', async function(data) {
@@ -54,6 +69,7 @@ function processing(elements) {
     
                     var result = (found + '/' + count_films);
                     element.text += (' (' + result +')');
+                    //localStorage.setItem(key, result);
                 }).catch(function(err) {
                     console.log('Fetch Error :-S', err);
                 });
@@ -64,10 +80,9 @@ function processing(elements) {
     });
 }
 
-function get_elements(document, list_name) {
-    let lists = { "Highlights": 1, "Top 250": 2 };
+function get_elements(document, number) {
     let elements = document.getElementsByClassName('article')[0].getElementsByTagName("table")[0]
-        .getElementsByTagName("tbody")[0].getElementsByTagName("tr")[lists[list_name]]
+        .getElementsByTagName("tbody")[0].getElementsByTagName("tr")[number]
         .getElementsByTagName("td")[1].getElementsByTagName("a");
     return elements;
 }

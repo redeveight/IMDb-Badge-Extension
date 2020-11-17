@@ -7,22 +7,21 @@ chrome.storage.sync.get('username', function(data) {
   text_field.value = data.username;
 });
 
-function on_apply_click() {
+async function on_apply_click() {
   let value = text_field.value;
   status.style.visibility = "visible";
   if (value != "") {
     if (user_id_regex.exec(value)) {
-      chrome.storage.sync.set({username: value}, function() {
+      await chrome.storage.sync.set({username: value}, function() {
         console.log("Username updated");
       });
 
-      status.textContent = "before";
       open_url(url);
     } else {
       status.textContent = "Incorrect user_id";
     }
   } else {
-    status.textContent = "Incorrect user_id";
+    status.textContent = "user_id required";
   }
 }
 document.getElementById("btn").onclick = on_apply_click;
@@ -33,12 +32,10 @@ function open_url(url) {
       chrome.tabs.update({url});
       chrome.tabs.onUpdated.addListener(function (tabId , info) {
         if (info.status === 'complete') {
-          status.textContent = "after";
           execute_script();
         }
       });
     } else {
-      status.textContent = "after";
       execute_script();
     }
   });
@@ -48,6 +45,7 @@ function execute_script() {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.executeScript(
       tabs[0].id,
-      {file: 'inject.js'});
+      {file: 'inject.js'}
+    );
   });
 }
