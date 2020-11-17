@@ -29,5 +29,5 @@
       "64": "files/images/imdb64.png",
       "128": "files/images/imdb128.png"
     },
-    "manifest_version": 3
+    "manifest_version": 2
 }
