@@ -45,7 +45,7 @@ function execute_script() {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.executeScript(
       tabs[0].id,
-      {file: 'inject.js'}
+      {file: 'resources/js/inject.js'}
     );
   });
 }

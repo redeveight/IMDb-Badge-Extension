@@ -1,33 +1,33 @@
 {
     "name": "IMDb Badge Extension",
-    "version": "0.5",
+    "version": "0.6",
     "description": "IMDB Badge Extension for Chrome Browser",
     "permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
     "background": {
-        "scripts": ["background.js"],
+        "scripts": ["resources/js/background.js"],
         "persistent": false
     },
     "page_action": {
       "default_title": "IMDB Badge Helper",
-      "default_popup": "popup.html",
+      "default_popup": "resources/popup.html",
       "default_icon": {
-        "16": "files/images/imdb16.png",
-        "32": "files/images/imdb32.png",
-        "64": "files/images/imdb64.png",
-        "128": "files/images/imdb128.png"
+        "16": "resources/images/icons/imdb16.png",
+        "32": "resources/images/icons/imdb32.png",
+        "64": "resources/images/icons/imdb64.png",
+        "128": "resources/images/icons/imdb128.png"
       }
     },
     "content_scripts": [
       {
         "matches": ["https://www.imdb.com/badge/*"],
-        "js": ["papaparse.js"]
+        "js": ["resources/js/papaparse.js"]
       }
     ],
     "icons": {
-      "16": "files/images/imdb16.png",
-      "32": "files/images/imdb32.png",
-      "64": "files/images/imdb64.png",
-      "128": "files/images/imdb128.png"
+      "16": "resources/images/icons/imdb16.png",
+      "32": "resources/images/icons/imdb32.png",
+      "64": "resources/images/icons/imdb64.png",
+      "128": "resources/images/icons/imdb128.png"
     },
     "manifest_version": 2
 }
