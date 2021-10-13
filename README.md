@@ -1,6 +1,6 @@
 <img align="left" alt="redeveight | Hover" src="https://github.com/redeveight/IMDb-Badge-Extension/blob/master/resources/images/logo.png" />
 
-### Description
+## Description
 [Beta] IMDb Chrome Browser Extension for fans of watching movies and collecting badges for their profile. Shows how many movies you have already rated from the list "Highlights 20XX Oscars" and "Top 250 20XX".
 
 ### How to use
